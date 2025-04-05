@@ -74,12 +74,20 @@ for INSERT
 to public
 with check (true);
 
-create policy "Allow anyone to insert"
+create policy "update_votes_only"
 on "public"."facts"
 as PERMISSIVE
-for INSERT
+for UPDATE
 to public
-with check (true);
+using (true)
+with check (
+  text = text AND
+  source = source AND
+  category = category
+);
 
 ```
+
+## DEPLOYEMENT
+ Deployed using netlify - https://shreya-fsd-facts.netlify.app/ 
 
