@@ -57,7 +57,7 @@ A simple React + Supabase app that lets users share and categorize facts, and vo
 
 ## 🔐 Supabase Policies
 
-### Select (Read)
+### Select (Read), Insert, Update(vote)
 
 ```sql
 create policy "Public read access"
@@ -65,4 +65,21 @@ on "public"."facts"
 as PERMISSIVE
 for SELECT
 to public
-using (true);
+using (true); 
+
+create policy "Allow anyone to insert"
+on "public"."facts"
+as PERMISSIVE
+for INSERT
+to public
+with check (true);
+
+create policy "Allow anyone to insert"
+on "public"."facts"
+as PERMISSIVE
+for INSERT
+to public
+with check (true);
+
+```
+
