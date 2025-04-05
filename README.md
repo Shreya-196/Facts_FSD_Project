@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+🌐 Today I Learned — Fact Sharing App (with Supabase)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React + Supabase app that lets users share and categorize facts, and vote on how interesting, mind-blowing, or false they are.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- ✅ Submit facts with source links
+- 📚 Categorize facts (science, technology, society, etc.)
+- 📊 Vote if a fact is interesting, mind-blowing, or false
+- 🔍 Filter facts by category
+- ☁️ All data stored and managed using Supabase
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **Frontend:** React.js
+- **Backend-as-a-Service:** Supabase (PostgreSQL + Auth + RLS)
+- **Styling:** CSS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🖼️ Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![App Screenshot](./screenshot.png)  
+*Replace this with your actual screenshot*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧠 How It Works
 
-### `npm run eject`
+- Users can view all facts or filter by category.
+- They can vote on facts.
+- Anyone can submit a new fact (with validation).
+- Facts are stored in the Supabase `facts` table.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🗃️ Database Schema
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Table: `facts`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Column           | Type      | Description                     |
+|------------------|-----------|---------------------------------|
+| id               | int       | Primary Key                     |
+| text             | text      | The fact text                   |
+| source           | text      | URL source                      |
+| category         | text      | Category (e.g., science)        |
+| votesInteresting | int       | Votes for interesting           |
+| votesMindblowing | int       | Votes for mind-blowing          |
+| votesFalse       | int       | Votes for false                 |
+| created_at       | timestamp | Auto-generated                  |
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔐 Supabase Policies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Select (Read)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```sql
+create policy "Public read access"
+on "public"."facts"
+as PERMISSIVE
+for SELECT
+to public
+using (true);
