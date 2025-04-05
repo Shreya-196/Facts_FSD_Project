@@ -24,8 +24,8 @@ A simple React + Supabase app that lets users share and categorize facts, and vo
 
 ## 🖼️ Screenshots
 
-![App Screenshot](./screenshot.png)  
-*Replace this with your actual screenshot*
+![image](https://github.com/user-attachments/assets/f2412a11-c018-49ab-a0fc-78fb5d3fbf84)
+
 
 ---
 
